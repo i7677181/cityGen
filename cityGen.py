@@ -255,49 +255,51 @@ def makeBlock(_name, _amount, _gap, _area1, _roadWidth, _paveSize, _cityVal, _zi
     block(_blockName, _area, _amount, _paveSize, _paveList, _roadWidth, _gap, _suburbs)
     rotateBlock(_blockName, blockGroup, _paveList)
 
-def makeWindow():
- 
+def UI():
     cityWindow = cmds.window(title = 'City Generator', wh = (400, 300), s = True) 
     cmds.columnLayout(adjustableColumn = True, rowSpacing = 5, cw=100, cal = 'left')
     cmds.text(label = 'Name of city:')
     cmds.textFieldGrp('cityName', ann = 'Name Of City:', tx = 'city')
     cmds.intSliderGrp('buildPerBlockSlider', field = True, label = "Buildings Per Block", v = 4, min = 1, max = 25)
-    cmds.floatSliderGrp('gapSlider', field = True, label = "Gap Between Buildings", v = 3, min = 1, max = 10, fs = 0.1)
-    cmds.floatSliderGrp('roadWidthSlider', field = True, label = "Width Of Road", v = 2, min = 2, max = 15, fs = 0.1)
-    cmds.floatSliderGrp('paveWidthSlider', field = True, label = "Width Of Pavements", v = 0.5, min = 0.1, max = 1, fs = 0.1)
+  
     cmds.intSliderGrp('blockSlider', field = True, label = "Number Of Blocks", v = 2, min = 2, max = 30)
     cmds.floatSliderGrp('citySpreadSlider', field = True, label = "City Spread", v = 0.6, min = 0, max = 1.2, fs = 0.1)
     cmds.colorSliderGrp ('cityColorSlider', label = "Colour", rgb = (0.1, 0.1, 1))
     cmds.rowColumnLayout(numberOfColumns = 2, columnWidth = [(1, 200), (2, 200)])
     _rgb = cmds.colorSliderGrp('cityColorSlider',query=True, rgbValue=True)
     cmds.button(label = "Delete City", width = 150, align = 'center', command = 'deleteCity()')
-    cmds.button(label = "Make City", width = 150, align = 'center', command = 'go()')
-   # cmds.button(label="Color City",w=50,align='center',command='pressColor()')
+    cmds.button(label = "Make City", width = 150, align = 'center', command = 'getInput()')
  
     cmds.showWindow(cityWindow)
 
- 
-def go():
+#---------------------------------------------------------------------------------------
+# get user input from UI
+#--------------------------------------------------------------------------------------- 
+def getInput():
     deleteCity()
     _name = cmds.textFieldGrp('cityName', query = True, text = True)
     _amount = cmds.intSliderGrp('buildPerBlockSlider', query = True, value = True)
-    _gap = cmds.floatSliderGrp('gapSlider', query = True, value = True)
-    _roadWidth = cmds.floatSliderGrp('roadWidthSlider', query = True, value = True)
-    _paveWidth = cmds.floatSliderGrp('paveWidthSlider', query = True, value = True)
     _districtSize = cmds.intSliderGrp('blockSlider', query = True, value = True)
     _citySpread = cmds.floatSliderGrp('citySpreadSlider', query = True, value = True)
     _rgb = cmds.colorSliderGrp('cityColorSlider',query=True, rgbValue=True)
-    makeCity('city', _amount, _gap, 5, _roadWidth, _paveWidth, _districtSize, _citySpread, _rgb)
+    makeCity('city', _amount, 2, 5, 5, 5, _districtSize, _citySpread, _rgb)
+	# set color after creation
     setColor(_rgb)
     print 'Your city has been made. Welcome to', _name
- 
+#---------------------------------------------------------------------------------------
+# delete previous instance
+#--------------------------------------------------------------------------------------- 
 def deleteCity():
     cmds.select(all = True)
     cmds.delete()
+#---------------------------------------------------------------------------------------
+# set colors
+#---------------------------------------------------------------------------------------
 def setColor(_rgb):
     shape=cmds.select(all=True)
     shape=cmds.polyColorPerVertex( rgb=_rgb,colorDisplayOption=True )
 
- 
 #---------------------------------------------------------------------------------------
-makeWindow()
+# show UI
+#---------------------------------------------------------------------------------------
+UI()
