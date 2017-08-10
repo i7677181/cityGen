@@ -1,5 +1,5 @@
-## @package ultraMaya_turntable
-# @brief turntable script
+#
+# @brief camera script
 #
 
 import maya.cmds as cmds
@@ -8,10 +8,6 @@ import pymel.core as pm
 import math as m
 from PySide import QtGui, QtCore
 import os
-
-
-# cam = pm.ls(type='camera')[0]
-# repr(cam)
 
 ##--------------------------------------------------------------------------------------------------##
 # positions camera, constrain bbox to locator for rotation
