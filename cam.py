@@ -1,5 +1,5 @@
 #
-# @brief camera script
+# @brief turntable camera script
 #
 
 import maya.cmds as cmds
