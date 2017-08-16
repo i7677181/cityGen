@@ -16,7 +16,7 @@ def setupCamera(fov, punch, view,frames):
     # set hdri image
     pm.mel.eval('redshiftCreateDomeLight;')
     pm.mel.eval('MASHnewNodeCallback( "rsDomeLightShape1");')
-    pm.mel.eval('setAttr -type "string" rsDomeLightShape1.tex0 "Q:/Lighting/hdriBrowser/outdoor/sunny/park/BourenmouthCentralParkSunny_7k_22EV_HDR.exr";')
+    pm.mel.eval('setAttr -type "string" rsDomeLightShape1.tex0 "path/name.exr";')
     pm.mel.eval('currentTime 1;')
     pm.mel.eval('setAttr "rsDomeLight1.rotateY" 0;')
     pm.mel.eval('setKeyframe { "rsDomeLight1.r" };')
