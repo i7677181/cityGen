@@ -1,7 +1,9 @@
 import pymel.core as pm
-
-_path = ""
-_frame = ""
+'''
+dynamically create  redshift hdri dome, apply image, animate rotation
+'''
+_path = "" #  image path
+_frame = "" #  rotation speed
 pm.mel.eval('redshiftCreateDomeLight;')
 pm.mel.eval('MASHnewNodeCallback( "rsDomeLightShape1");')
 pm.mel.eval('setAttr -type "string" rsDomeLightShape1.tex0 "{0}";'.format(_path))
